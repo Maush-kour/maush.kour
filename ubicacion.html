@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ubicación — MAUSH KOUR</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #111, #000);
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .location-box {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      color: gold;
+      margin-bottom: 20px;
+    }
+
+    select, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    button {
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="location-box">
+    <h2>Confirma tu ubicación</h2>
+    <form>
+      <select id="departamento" required>
+        <option value="">Selecciona tu departamento</option>
+        <option value="lambayeque">Lambayeque</option>
+      </select>
+
+      <select id="provincia" required>
+        <option value="">Selecciona tu provincia</option>
+      </select>
+
+      <select id="distrito" required>
+        <option value="">Selecciona tu distrito</option>
+      </select><br>
+
+      <button type="button" onclick="window.location.href='bienvenido.html'">Continuar</button>
+    </form>
+  </div>
+
+  <script>
+    const provincias = {
+      lambayeque: ["Chiclayo", "Lambayeque"]
+    };
+
+    const distritos = {
+      Chiclayo: [
+        "Chiclayo", "Chongoyape", "Eten", "Eten Puerto", 
+        "José Leonardo Ortiz", "La Victoria", "Lagunas (Mocupe)",
+        "Monsefú", "Nueva Arica", "Oyotún", "Picsi", 
+        "Pimentel", "Reque", "Santa Rosa", "Saña"
+      ],
+      Lambayeque: [
+        "Lambayeque", "Chochope", "Íllimo", "Jayanca", 
+        "Mochumí", "Mórrope", "Motupe", "Olmos", 
+        "Pacora", "Salas", "San José", "Túcume"
+      ]
+    };
+
+    const selectDepartamento = document.getElementById("departamento");
+    const selectProvincia = document.getElementById("provincia");
+    const selectDistrito = document.getElementById("distrito");
+
+    selectDepartamento.addEventListener("change", () => {
+      const depto = selectDepartamento.value;
+      selectProvincia.innerHTML = '<option value="">Selecciona tu provincia</option>';
+      selectDistrito.innerHTML = '<option value="">Selecciona tu distrito</option>';
+      if (provincias[depto]) {
+        provincias[depto].forEach(prov => {
+          const option = document.createElement("option");
+          option.value = prov;
+          option.textContent = prov;
+          selectProvincia.appendChild(option);
+        });
+      }
+    });
+
+    selectProvincia.addEventListener("change", () => {
+      const prov = selectProvincia.value;
+      selectDistrito.innerHTML = '<option value="">Selecciona tu distrito</option>';
+      if (distritos[prov]) {
+        distritos[prov].forEach(dist => {
+          const option = document.createElement("option");
+          option.value = dist;
+          option.textContent = dist;
+          selectDistrito.appendChild(option);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
